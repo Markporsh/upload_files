@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+  backend:
+    build: .
+    depends_on:
+      - db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+  redis:
+    image: "redis:alpine"
+
+  celery:
+    build: .
+    command: celery -A uploadfiles worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+volumes:
+  postgres_data:
