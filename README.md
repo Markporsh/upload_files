@@ -9,8 +9,8 @@
 1. Клонируйте репозиторий:
 
    ```bash
-   git clone <repository_url>
-   cd <project_directory>
+   git clone https://github.com/Markporsh/upload_files.git
+   cd upload_files
    ```
 
 2. Создайте файл `.env` в корневой директории и определите следующие переменные окружения:
